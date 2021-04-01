@@ -33,8 +33,14 @@ Engine have just two methods: addTemplate and render. Both are receiving paramet
 
 ## Configuration object
 
+All configuration fields are optional.
 ```js
-
+{
+        TG_PRX       : '{{'           // Change default  placeholder's opening tag
+      , TG_SFX       : '}}'           // Change default  placeholder's opening tag
+      , DV           : ':'            // Chnage default props divider
+      , debug        : false          // Set on 'true' to receive more warnings and error messages
+ }
 ```
 
 
