@@ -21,6 +21,10 @@
     "mocha": "8.3.2",
     "nyc": "15.1.0"
   },
+  "repository": {
+      "type": "git",
+      "url" : "https://github.com/PeterNaydenov/tag-templates.git"
+  },
   "nyc": {
     "include": [
       "src/**/*.js"
