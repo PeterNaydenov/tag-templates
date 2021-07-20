@@ -1,11 +1,11 @@
 {
   "name": "@peter.naydenov/tag-templates",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Template engine build on top of javascript native technologies: template literals and tag functions.",
   "main": "src/main.js",
   "scripts": {
-     "test"   : "mocha test"
-    , "cover" : "nyc mocha"
+    "test": "mocha test",
+    "cover": "nyc mocha"
   },
   "keywords": [
     "template",
@@ -22,8 +22,8 @@
     "nyc": "15.1.0"
   },
   "repository": {
-      "type": "git",
-      "url" : "https://github.com/PeterNaydenov/tag-templates.git"
+    "type": "git",
+    "url": "https://github.com/PeterNaydenov/tag-templates.git"
   },
   "nyc": {
     "include": [
