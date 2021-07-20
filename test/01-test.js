@@ -194,6 +194,30 @@ it ( 'Missing prop', () => {
 
 
 
+it ( 'Data render', () => {
+      let vm = tagTemplates();
+      vm.addTemplate`yo FROM: {{from}} TO {{to}}`
+      let 
+            data = {from: '10:00', to: '12:45'}
+          , block = vm.dataRender ( 'yo', data )   // ( templateName, props )
+          ;
+      expect ( block ).to.be.equal ( 'FROM: 10:00 TO 12:45' )
+}) // it data render
+
+
+
+it ( 'Show template names', () => {
+      let vm = tagTemplates();
+      vm.addTemplate`yo FROM: {{from}} TO {{to}}`
+      vm.addTemplate`mo User: {{name}}`
+      let names = vm.showTemplateNames ();
+      expect ( names ).to.have.length ( 2 )
+      expect ( names ).to.contain ( 'yo' )
+      expect ( names ).to.contain ( 'mo' )
+}) // it show template names
+
+
+
 it ( 'Latter evaluation?')
 
 it ( 'CSS styles described like props in render call?' )
