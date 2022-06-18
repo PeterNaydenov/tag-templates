@@ -147,6 +147,9 @@ If templates for your project are already created and they are not in mustache s
 
 ## Release History
 
+### 1.3.0 ( 2022-06-18 )
+- [x] Support for multiline external props;
+
 ### 1.2.0 ( 2022-06-18 )
  - [x] Function addTemplate supports external variables for template definition;
  - [x] Define single template by mixing two or more template strings;

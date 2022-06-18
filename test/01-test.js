@@ -1,6 +1,7 @@
 const
      tagTemplates = require ( '../src/main' )
    , expect       = require ( 'chai' ).expect
+   , htmlTemplate = require ( '../test-data/html' )
    ;
 
 
@@ -13,7 +14,9 @@ it ( 'General use: Add template and render some props', () => {
     let 
           vm      =  tagTemplates ()
         , hi      = 'hi Hello, {{name}}! Say: {{shout}}, {{shout}}!'  // Here is template named 'hi'
-        , request = 'hi name:Peter shout:yo'   // Prepare request: Use template 'hi' with params "name" and "shout"
+        , request = `hi 
+                        name:Peter 
+                        shout:yo`   // Prepare request: Use template 'hi' with params "name" and "shout"
         ;
 
     vm.addTemplate`${hi}`               // Register the template 'hi'
@@ -49,7 +52,7 @@ it ( 'General use: Add template and render some props', () => {
                      Your name is <<name>>>`
       let block = vm.render`
                         test
-                            name : Peter`
+                            name : Peter   age:48`
       expect ( block ).to.contains ( 'Your name is Peter' )
  }) // it settings
 
@@ -117,7 +120,7 @@ it ( 'Template with external variable', () => {
       
                   title
                               title: Just do it`
-
+                              
       expect ( vm.showTemplateNames()[0] ).to.be.equal ( 'title' )
       expect ( res ).to.be.equal ( '<h1>Just do it</h1>' )
 }) // it template with external variable
@@ -157,6 +160,30 @@ it ( 'Mixed template definition 2', () => {
 
 
 
+it ( 'Multiline property', () => {
+      const 
+              vm = tagTemplates ()
+            , lines = `<li>Line 1</li>
+                        <li>Line 2</li>
+                        <li>Line 3</li>
+                        <li>Line 4</li>`
+            , more = `more: aloha
+                      mood: happy`
+            ;
+      vm.addTemplate`html ${htmlTemplate}`
+      const res = vm.render`
+                        html
+                              listing:${lines}
+                              ${more}
+                              note: Testing...`
+      expect ( res).to.include ( 'aloha' )
+      expect ( res).to.include ( 'Line 4' )
+      expect ( res).to.include ( 'happy' )
+      expect ( res).to.include ( 'Testing...' )
+}) // it multiline property
+
+
+
 it ( 'Multiline props', () => {
       let vm = tagTemplates ();
       vm.addTemplate`
@@ -167,9 +194,9 @@ it ( 'Multiline props', () => {
 
       let block = vm.render`
                       total
-                          title   :   Long string title
-                          msg     :   Just a message
-                          author  :   Peter
+                          title : Long string title
+                          msg : Just a message
+                          author : Peter
                       `
       expect ( block ).to.includes ('<h1>Long string title from Peter</h1>')
       expect ( block ).to.includes ( '<p>Just a message</p>' )
@@ -187,13 +214,14 @@ it ( 'Single external prop', () => {
       // Set template 'total' to the engine:
       vm.addTemplate`
               total   
-                  <h1>{{title}}</h1>
-                `
+                  <h1>{{title}}</h1>`
+
       // Case 1:
       let block = vm.render` 
                       total 
                           title : ${externalTitle}`
       expect ( block ).to.contain ( '<h1>External Title</h1>' )
+      
       
       // Case 2:
       let externalString = `total 
@@ -229,8 +257,8 @@ it ( 'Props with external variables', () => {
       let block = vm.render` 
                       total
                               title : ${title}
-                              msg   : Just a message
-                              txt   : ${txt}
+                              msg : Just a message
+                              txt : ${txt}
                       `
       expect ( block ).to.contains ('<h1>External title</h1>')
       expect ( block ).to.contains ('<p>Just a message</p>')
