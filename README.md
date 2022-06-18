@@ -64,6 +64,30 @@ const engine = tagTemplates ()
                     <p>User {{name}} is {{age}} years old.</p>`
  engine.addTemplate`${nextTemplate}`
  
+
+
+ // After version 1.2.0 "addTemplate" could work like:
+ let 
+      title = '<h1>{{title}}</h1>'
+    , txt = '<p>{{text}}</p>'
+    ;
+  
+  engine.addTemplate`
+          news
+              ${title}
+              ${txt}`
+
+  engine.render`
+            news
+                title : my own news channel
+                txt   : Just started to write `
+    /**
+     *  result:
+     *    <title>my own news channel</title>
+     *    <p>Just started to write</p>
+     *  
+     */
+
  
   // Render template 'hello' with data:
   let block = engine.render`
@@ -122,6 +146,10 @@ If templates for your project are already created and they are not in mustache s
 
 
 ## Release History
+
+### 1.2.0 ( 2022-06-18 )
+ - [x] Function addTemplate supports external variables for template definition;
+ - [x] Define single template by mixing two or more template strings;
 
 ### 1.0.0 ( 2021-04-01 )
  - [x] Node.js module;

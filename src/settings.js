@@ -5,7 +5,7 @@ const
       , TG_SIZE_P    = TG_PRX.length  // Size of opening tag.
       , TG_SIZE_S    = TG_SFX.length  // Size of closing tag.
       , DV           = ':'            // Divider in vars
-      , debug       = false
+      , debug        = false          // Console messages for warning and messages works only if "debug" is true
       ;
   
 const settings = {

@@ -101,6 +101,62 @@ it ( 'General use: Add template and render some props', () => {
 
 
 
+it ( 'Template with external variable', () => {
+      const 
+              vm = tagTemplates ()
+            , tpl = '<h1>{{title}}</h1>'
+            , name = 'title'
+            ;
+
+      vm.addTemplate`
+
+                  ${name} 
+                        ${tpl}`
+
+      const res = vm.render`
+      
+                  title
+                              title: Just do it`
+
+      expect ( vm.showTemplateNames()[0] ).to.be.equal ( 'title' )
+      expect ( res ).to.be.equal ( '<h1>Just do it</h1>' )
+}) // it template with external variable
+
+
+
+it ( 'Mixed template definition', () => {
+      const
+              vm = tagTemplates ()
+            , t1 = '<h1>{{title}}</h1>'
+            , t2 = '<p>{{text}}</p>'
+            ;
+      vm.addTemplate`news
+                        ${t1}
+                        ${t2}`
+      const res = vm.render`news
+                              title: Hello
+                              text: just testing`
+      expect ( res ).to.be.equal ( '<h1>Hello</h1> <p>just testing</p>' )
+}) // it mixed template definition
+
+
+
+it ( 'Mixed template definition 2', () => {
+      const
+              vm = tagTemplates ()
+            , t1 = 'news'
+            , t2 = '<p>{{text}}</p>'
+            ;
+      vm.addTemplate`${t1}
+                        <h1>{{title}}</h1>${t2}`
+      const res = vm.render`news
+                              title: Hello
+                              text: just testing`
+      expect ( res ).to.be.equal ( `<h1>Hello</h1> <p>just testing</p>` )
+}) // it mixed template definition 2
+
+
+
 it ( 'Multiline props', () => {
       let vm = tagTemplates ();
       vm.addTemplate`

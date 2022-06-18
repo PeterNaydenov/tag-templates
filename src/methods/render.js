@@ -1,3 +1,5 @@
+'use strict'
+
 function render ( list, settings ) {
 return function render () {   // call template with data
         let 
