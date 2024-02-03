@@ -45,6 +45,6 @@ function showError () {
 
 
 
-module.exports = _chopTemplate
+export default _chopTemplate
 
 

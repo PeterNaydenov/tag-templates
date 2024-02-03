@@ -4,6 +4,6 @@ function _debugger ( str ) {
 
 
 
-module.exports = _debugger
+export default _debugger
 
 

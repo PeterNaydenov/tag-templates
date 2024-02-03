@@ -32,6 +32,6 @@ return function addTemplate () {
 
 
 
-module.exports = addTemplate
+export default addTemplate
 
 

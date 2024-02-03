@@ -28,7 +28,7 @@ return function dataRender ( template, data ) {
     
         
     
-module.exports = dataRender
+export default dataRender
     
     
     

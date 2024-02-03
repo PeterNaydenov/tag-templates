@@ -101,6 +101,6 @@ function _readProps ( d , DV ) {
 
 
 
-module.exports = render
+export default render
 
 

@@ -1,12 +1,10 @@
-const 
-      _chopTemplate     = require ( "./_chopTemplate"             )
-    , _debugger         = require ( './methods/_debugger'         )
-    , defaultSettings   = require ( "./settings"                  )
-    , render            = require ( './methods/render'            )
-    , addTemplate       = require ( './methods/addTemplate'       )
-    , showTemplateNames = require ( './methods/showTemplateNames' )
-    , dataRender        = require ( './methods/dataRender'        )
-    ;
+import _chopTemplate from "./_chopTemplate.js"
+import _debugger from './methods/_debugger.js'
+import defaultSettings from "./settings.js"
+import render from './methods/render.js'
+import addTemplate from './methods/addTemplate.js'
+import showTemplateNames from './methods/showTemplateNames.js'
+import dataRender from './methods/dataRender.js'
 
 
 
@@ -35,6 +33,6 @@ function tagTemplates ( config={}) {
 
 
 
-module.exports = tagTemplates
+export default tagTemplates
 
 

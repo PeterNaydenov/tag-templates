@@ -1,8 +1,6 @@
-const
-     tagTemplates = require ( '../src/main' )
-   , expect       = require ( 'chai' ).expect
-   , htmlTemplate = require ( '../test-data/html' )
-   ;
+import tagTemplates from '../src/main.js'
+import { expect } from 'chai'
+import htmlTemplate from '../test-data/html.js'
 
 
 

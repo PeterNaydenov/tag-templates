@@ -7,6 +7,6 @@ function showTemplateNames ( list ) {
 
 
 
-module.exports = showTemplateNames
+export default showTemplateNames
 
 

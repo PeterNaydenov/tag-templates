@@ -1,31 +1,40 @@
 {
   "name": "@peter.naydenov/tag-templates",
-  "version": "1.3.0",
   "description": "Template engine build on top of javascript native technologies: template literals and tag functions.",
-  "main": "src/main.js",
+  "version": "1.3.0",
+  "license": "MIT",
+  "author": "Peter Naydenov",
+  "main": "./dist/tag-templates.umd.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/tag-templates.esm.mjs",
+      "require": "./dist/tag-templates.cjs",
+      "default": "./dist/tag-templates.umd.js"
+    },
+    "./package.json": "./package.json",
+    "./dist/*": "./dist/*",
+    "./src/*": "./src/*"
+  },
   "scripts": {
     "test": "mocha test",
-    "cover": "nyc mocha"
+    "cover": "c8 mocha",
+    "build": "rollup -c"
   },
-  "keywords": [
-    "template",
-    "engine",
-    "string",
-    "tag",
-    "function"
-  ],
-  "author": "Peter Naydenov",
-  "license": "MIT",
   "devDependencies": {
-    "chai": "4.3.10",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "c8": "^9.1.0",
+    "chai": "5.0.3",
     "mocha": "10.2.0",
-    "nyc": "^15.1.0"
+    "rollup": "^4.9.6"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/PeterNaydenov/tag-templates.git"
   },
-  "nyc": {
+  "c8": {
     "include": [
       "src/**/*.js"
     ],
@@ -37,5 +46,12 @@
       "lcov",
       "text-summary"
     ]
-  }
+  },
+  "keywords": [
+    "template",
+    "engine",
+    "string",
+    "tag",
+    "function"
+  ]
 }

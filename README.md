@@ -1,5 +1,10 @@
 # Tag Templates (@peter.naydenov/tag-templates)
 
+![version](https://img.shields.io/github/package-json/v/peterNaydenov/tag-templates)
+![license](https://img.shields.io/github/license/peterNaydenov/tag-templates)
+![issues](https://img.shields.io/github/issues/peterNaydenov/tag-templates)
+![language](https://img.shields.io/github/languages/top/peterNaydenov/tag-templates)
+![npm bundle size (scoped version)](https://img.shields.io/bundlephobia/minzip/%40peter.naydenov/tag-templates/1.4.0)
 
 
 Template engine build on top of javascript native technologies: template literals and tag functions. 
@@ -144,22 +149,9 @@ If templates for your project are already created and they are not in mustache s
 
 
 
+## Links
 
-
-
-## Release History
-
-### 1.3.0 ( 2022-06-18 )
-- [x] Support for multiline external props;
-
-### 1.2.0 ( 2022-06-18 )
- - [x] Function addTemplate supports external variables for template definition;
- - [x] Define single template by mixing two or more template strings;
-
-### 1.0.0 ( 2021-04-01 )
- - [x] Node.js module;
- - [x] Tests;
- - [x] Short documentation;
+- [Release History](https://github.com/PeterNaydenov/tag-templates/blob/master/CHANGELOG.md)
 
 
 
