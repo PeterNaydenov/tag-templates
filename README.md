@@ -20,12 +20,16 @@ Install the package:
 ```
 
 
-Request the module from the script:
+Add module to the script:
 
 ```js
+// with commonjs:
 const tagTemplates = require ( '@peter.naydenov/tag-templates' );
 
+// with es6:
+import tagTemplates from '@peter.naydenov/tag-templates'
 ```
+
 
 
 ## Methods
@@ -151,7 +155,7 @@ If templates for your project are already created and they are not in mustache s
 
 ## Links
 
-- [Release History](https://github.com/PeterNaydenov/tag-templates/blob/master/CHANGELOG.md)
+- [History of changes](https://github.com/PeterNaydenov/tag-templates/blob/master/CHANGELOG.md)
 
 
 
