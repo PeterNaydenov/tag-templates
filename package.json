@@ -28,7 +28,7 @@
     "c8": "^9.1.0",
     "chai": "5.1.0",
     "mocha": "10.4.0",
-    "rollup": "^4.13.0"
+    "rollup": "^4.13.2"
   },
   "repository": {
     "type": "git",
