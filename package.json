@@ -8,6 +8,7 @@
   "type": "module",
   "exports": {
     ".": {
+      "types": "./dist/main.d.ts",
       "import": "./src/main.js",
       "require": "./dist/tag-templates.cjs",
       "default": "./src/main.js"
@@ -19,7 +20,7 @@
   "scripts": {
     "test": "vitest run",
     "cover": "vitest run --coverage",
-    "build": "rollup -c"
+    "build": "rollup -c && tsc"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^29.0.3",
@@ -27,6 +28,7 @@
     "@rollup/plugin-terser": "^1.0.0",
     "@vitest/coverage-v8": "^4.1.10",
     "rollup": "^4.62.3",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.10"
   },
   "repository": {
