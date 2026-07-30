@@ -1,6 +1,14 @@
 # Release History
 
 
+### 1.5.0 ( 2026-07-30)
+- [x] Migration from mocha to vitest;
+- [x] Setting coverage-v8 as a coverage provider;
+- [x] Setting a jsdoc for the library;
+- [x] Install typescript v.7;
+- [x] Typescript compilation of d.ts file from jsdoc;
+
+
 
 ### 1.4.0 ( 2024-02-03)
 - [x] No changes in functionality;
