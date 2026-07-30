@@ -1,3 +1,15 @@
+/**
+ * Factory and bound function for chopping a template body around
+ * `{{placeholder}}` markers.
+ *
+ * Each returned call splits a template string into an array of segments
+ * alternating between literal text and placeholder substrings (including
+ * their `{{` / `}}` markers). If the template is malformed, returns a
+ * sentinel array.
+ *
+ * @param {import('./main.js').Settings} settings  Effective runtime settings.
+ * @returns {(text: string) => string[]}
+ */
 function _chopTemplate ( settings ) {
 return function _chopTemplate ( text ) {
     const { TG_PRX, TG_SFX, TG_SIZE_P, TG_SIZE_S } = settings;

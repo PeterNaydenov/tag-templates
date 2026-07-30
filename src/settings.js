@@ -1,4 +1,12 @@
-// *** Default settings for 'Tag Templates'
+/**
+ * Default engine settings exposed as {@link Settings}. Override any field by
+ * passing a `Config` object to {@link tagTemplates}.
+ *
+ * - `TG_PRX` / `TG_SFX` — placeholder opening / closing tag.
+ * - `TG_SIZE_P` / `TG_SIZE_S` — pre-computed lengths of the tags above.
+ * - `DV` — key/value divider inside render requests.
+ * - `debug` — when `true`, warnings are emitted via `console.error`.
+ */
 const
         TG_PRX       = '{{'           // Template placeholder opening tag
       , TG_SFX       = '}}'           // Template placeholder closing tag
