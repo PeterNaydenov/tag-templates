@@ -1,5 +1,5 @@
 import tagTemplates from '../src/main.js'
-import { expect } from 'chai'
+import { describe, expect, it } from 'vitest'
 import htmlTemplate from '../test-data/html.js'
 
 
