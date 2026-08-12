@@ -4,152 +4,205 @@
 ![license](https://img.shields.io/github/license/peterNaydenov/tag-templates)
 ![issues](https://img.shields.io/github/issues/peterNaydenov/tag-templates)
 ![language](https://img.shields.io/github/languages/top/peterNaydenov/tag-templates)
-![npm bundle size (scoped version)](https://img.shields.io/bundlephobia/minzip/%40peter.naydenov/tag-templates/1.4.0)
+![npm bundle size (scoped version)](https://img.shields.io/bundlephobia/minzip/%40peter.naydenov/tag-templates/1.5.0)
 
-
-Template engine build on top of javascript native technologies: template literals and tag functions. 
+Template engine built on top of JavaScript's native technologies: template literals and tag functions.
 
 
 
 ## Installation
+
 Install the package:
 
 ```
- npm i @peter.naydenov/tag-templates
-
+npm i @peter.naydenov/tag-templates
 ```
 
-
-Add module to the script:
+Add it to your script:
 
 ```js
-// with commonjs:
-const tagTemplates = require ( '@peter.naydenov/tag-templates' );
-
-// with es6:
-import tagTemplates from '@peter.naydenov/tag-templates'
+import tagTemplates from '@peter.naydenov/tag-templates';
 ```
 
 
 
 ## Methods
-Engine have just two methods: addTemplate and render. Both are receiving parameters as text strings. Look at "**How to use it**" section.
 
-```js
-{
-  addTemplate : 'Write a template'
-  render      : 'Convert data+template into a rendered block'
-}
-```
+The engine exposes four methods. All of them accept their input as text
+strings — most of them via a tag-function call so you can mix in variables
+with the usual `${...}` syntax.
+
+| Method               | Purpose                                            |
+| -------------------- | -------------------------------------------------- |
+| `addTemplate`        | Register a named template.                         |
+| `render`             | Render a template against inline data (tag form).  |
+| `dataRender`         | Render a template against a plain data object.     |
+| `showTemplateNames`  | List the names of all registered templates.        |
+
+
 
 ## Configuration object
 
-All configuration fields are optional.
+All fields are optional. Anything you omit falls back to the defaults below.
+
 ```js
 {
-        TG_PRX       : '{{'           // Change default  placeholder's opening tag
-      , TG_SFX       : '}}'           // Change default  placeholder's opening tag
-      , DV           : ':'            // Chnage default props divider
-      , debug        : false          // Set on 'true' to receive more warnings and error messages
- }
+    TG_PRX : '{{'   // Placeholder opening tag.
+  , TG_SFX : '}}'   // Placeholder closing tag.
+  , DV     : ':'    // Divider between a key and its value inside render calls.
+  , debug  : false  // When true, warnings and error messages are written to console.error.
+}
 ```
+
 
 
 ## How to use it
 
 ```js
-const tagTemplates = require ( '@peter.naydenov/tag-templates' );
+import tagTemplates from '@peter.naydenov/tag-templates';
 
-// Create a render engine instance:
-const engine = tagTemplates ()
+// Create an engine instance:
+const engine = tagTemplates();
 
-// Set a template "hello".
-  engine.addTemplate`
+// Register a template named "hello":
+engine.addTemplate`
             hello
                 <title>Hello {{name}}</title>
-                <p>{{msg}}</p>`
- 
- // Other technique when template is defined as external variable.
- let nextTemplate = `
-                show
-                    <p>User {{name}} is {{age}} years old.</p>`
- engine.addTemplate`${nextTemplate}`
- 
+                <p>{{msg}}</p>`;
 
-
- // After version 1.2.0 "addTemplate" could work like:
- let 
-      title = '<h1>{{title}}</h1>'
-    , txt = '<p>{{text}}</p>'
-    ;
-  
-  engine.addTemplate`
-          news
-              ${title}
-              ${txt}`
-
-  engine.render`
-            news
-                title : my own news channel
-                txt   : Just started to write `
-    /**
-     *  result:
-     *    <title>my own news channel</title>
-     *    <p>Just started to write</p>
-     *  
-     */
-
- 
-  // Render template 'hello' with data:
-  let block = engine.render`
-            hello
-                    name : Peter
-                    msg  :  Welcome to this page`
-   /**
-   *    result:
-   *    <title>Hello Peter</title>
-   *    <p>Welcome to this page</p> 
-   */
-
-   // Other way to provide the data for template "hello"
-   let 
-          myMsg = 'Other message'
-        , myName = 'Kris'
-        ;
-   block = engine.render`
-                hello
-                    name : ${myName}
-                    msg  : ${myMsg}`
-    /**
-    *     result:
-    *     <title>Hello Kris</title>
-    *     <p>Other message</p>
-    */
+// (You can also build the template from external strings:)
+let nextTemplate = `
+            show
+                <p>User {{name}} is {{age}} years old.</p>`;
+engine.addTemplate`${nextTemplate}`;
 ```
 
-If templates for your project are already created and they are not in mustache style, then modify the template engine by providing a configuration object:
+Since version 1.2.0 you can mix template literals with external variables:
 
 ```js
- let 
-    config = { 
-                TG_PRX : '<<'   // Change of opening tag
-              , TG_SFX : '>>>'  // Change of closing tag
-              , DV     : '-->'  // Data devider is also customizable
-        }
-    , vm = tagTemplates ( config )
+let
+      title = '<h1>{{title}}</h1>'
+    , txt   = '<p>{{text}}</p>';
+
+engine.addTemplate`
+        news
+            ${title}
+            ${txt}`;
+```
+
+### Rendering with inline data (`render`)
+
+```js
+// Render "hello" with inline props:
+let block = engine.render`
+            hello
+                    name : Peter
+                    msg  :  Welcome to this page`;
+// -> <title>Hello Peter</title><p>Welcome to this page</p>
+
+// Render "hello" mixing inline props with external variables:
+let
+      myMsg  = 'Other message'
+    , myName = 'Kris'
     ;
-    // Provide template with your custom style
-    vm.addTemplate`
-                    test
-                    Your name is <<name>>>`
-    // Render 
-    let block = vm.render`
-                    test
-                        name --> Peter`
-    // Result -->  'Your name is Peter'
+block = engine.render`
+            hello
+                    name : ${myName}
+                    msg  : ${myMsg}`;
+// -> <title>Hello Kris</title><p>Other message</p>
+
+// Render the "news" template:
+let newsBlock = engine.render`news
+                title : my own news channel
+                text  : Just started to write`;
+// -> <h1>my own news channel</h1><p>Just started to write</p>
+```
+
+### Rendering with a data object (`dataRender`)
+
+If you already have the data as an object, use `dataRender(name, data)`
+instead of the tag-form `render`:
+
+```js
+engine.addTemplate`yo FROM: {{from}} TO {{to}}`;
+
+let block = engine.dataRender('yo', { from: '10:00', to: '12:45' });
+// -> 'FROM: 10:00 TO 12:45'
+```
+
+`dataRender` returns `null` when the template name is not registered and an
+empty string for placeholders that have no matching data key.
+
+### Listing registered templates (`showTemplateNames`)
+
+```js
+engine.addTemplate`one hi {{name}}`;
+engine.addTemplate`mo  User: {{name}}`;
+
+engine.showTemplateNames();
+// -> ['one', 'mo']
 ```
 
 
+
+## Customising the syntax
+
+If your templates are not in Mustache style, override the placeholders and
+the key/value divider via the configuration object:
+
+```js
+let
+      config = {
+                  TG_PRX : '<<'    // Custom opening tag
+                , TG_SFX : '>>>'   // Custom closing tag
+                , DV     : '-->'   // Custom key/value divider
+              }
+    , vm     = tagTemplates(config)
+    ;
+
+vm.addTemplate`
+            test
+                Your name is <<name>>>`;
+
+let block = vm.render`
+            test
+                name --> Peter`;
+// -> 'Your name is Peter'
+```
+
+
+
+## API summary
+
+### `tagTemplates(config?) -> engine`
+
+Creates a fresh, independent engine instance. Each call returns its own
+template pool, so multiple engines don't share state.
+
+### `engine.addTemplate`\``name …body`\``
+
+Registers a named template. The first whitespace-separated token is the
+name; everything that follows is the body. Empty fragments in the template
+literal are filled from the next positional argument, so the name or the
+body (or parts of the body) can come from external variables.
+
+### `engine.render`\``name key:val key:${val2}`\``
+
+Renders a registered template against inline data. The first token is the
+template name; remaining tokens are `key:value` pairs separated by
+`config.DV` (default `:`). A token whose value is missing reads from the
+next positional argument (useful for inline variables). Returns `null` when
+the template is not registered.
+
+### `engine.dataRender(name, data)`
+
+Renders a registered template against a plain object of placeholder values.
+Returns `null` when the template is not registered. Missing keys render as
+empty strings.
+
+### `engine.showTemplateNames()`
+
+Returns the array of template names currently registered in this engine.
 
 
 
@@ -160,9 +213,11 @@ If templates for your project are already created and they are not in mustache s
 
 
 ## Credits
-'@peter.naydenov/tag-templates' was created by Peter Naydenov.
+
+`@peter.naydenov/tag-templates` was created by Peter Naydenov.
 
 
 
 ## License
-'@peter.naydenov/tag-templates' is released under the MIT License.
+
+`@peter.naydenov/tag-templates` is released under the MIT License.
